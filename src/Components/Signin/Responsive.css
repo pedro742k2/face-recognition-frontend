@@ -1,0 +1,49 @@
+@media (max-width: 800px) {
+  .signin-box {
+    width: 650px;
+  }
+
+  .signin-inputs-div input {
+    width: 80%;
+  }
+
+  .sign-in-buttons-div button:first-of-type {
+    width: 35%;
+  }
+
+  .sign-in-buttons-div button {
+    width: 45%;
+  }
+}
+
+@media (max-width: 690px) {
+  .signin-box {
+    width: 90%;
+  }
+
+  .horizontal-line {
+    display: block;
+    width: 50%;
+    height: 2px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .sign-in-buttons-div {
+    flex-direction: column;
+  }
+
+  .sign-in-buttons-div button:first-of-type {
+    width: 80%;
+    border-width: 2px;
+    margin-bottom: 2px;
+    border-radius: 5px;
+  }
+
+  .sign-in-buttons-div button {
+    width: 80%;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 10px 15px;
+  }
+}

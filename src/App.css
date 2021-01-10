@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+
+  overflow-x: hidden;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.homeContainer {
+  animation: fadeIn;
+  animation-duration: 0.5s;
+}
+
+.errors-container {
+  margin-top: 20px;
+}
+
+.error-box {
+  display: none;
+}
+
+.error-box.active {
+  display: flex;
+  opacity: 1;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  margin: 10px 0px 10px 0px;
+  background-color: #fff;
+  padding: 0px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+
+  background-color: #ffdb39;
+  color: #272727;
+  font-size: 1.2em;
+  cursor: default;
+}
+
+.error-box.credentials {
+  background-color: #ff3939;
+  color: #fff;
+}
+
+.error-box p {
+  width: 95%;
+  text-align: start;
+}
+
+.close {
+  width: 5%;
+  height: auto;
+  opacity: 0.6;
+
+  cursor: pointer;
+}
+
+.errors-container .active {
+  display: flex;
+  /*animation: fade linear 0.1s;*/
+  animation: fadeInTopRight;
+  animation-duration: 0.2s;
+}

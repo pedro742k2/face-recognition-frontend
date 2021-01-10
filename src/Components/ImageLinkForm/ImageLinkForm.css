@@ -1,0 +1,47 @@
+.form {
+  width: 700px;
+
+  background-color: rgba(0, 0, 0, 0.25);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(255, 255, 255, 0.5) 35px,
+    rgba(255, 255, 255, 0.5) 70px
+  );
+}
+
+.input-title {
+  color: #fff;
+  font-weight: bold;
+  cursor: default;
+}
+
+input,
+button {
+  outline: none;
+  color: #006eff;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.8);
+
+  border: 2px solid #006eff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.input-field::placeholder {
+  color: #006eff;
+}
+
+.input-field {
+  margin-right: 25px;
+}
+
+.input-btn {
+  opacity: 0.5;
+  transition: all linear 0.3s;
+}
+
+.input-btn:hover {
+  opacity: 1;
+}

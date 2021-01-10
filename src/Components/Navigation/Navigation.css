@@ -1,0 +1,15 @@
+.sign-btn {
+  color: #fff;
+  border-radius: 5px;
+  transition: all linear 0.2s;
+}
+
+.enable:hover {
+  color: #006eff;
+  background-color: #fff;
+}
+
+.disable {
+  cursor: default;
+  opacity: 0.5;
+}

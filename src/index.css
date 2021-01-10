@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+
+html,
+body,
+input,
+button,
+::placeholder {
+  font-family: "Space Grotesk", Courier, monospace, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  padding: 5px;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(89deg, #553d8d 0%, #006eff 100%);
+}
+
+button {
+  cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px #006eff inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #fff !important;
+}
