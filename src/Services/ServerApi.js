@@ -1,3 +1,3 @@
-const ServerApi = "http://192.168.1.64:5000";
+const ServerApi = "https://intel-smart-face.herokuapp.com";
 
 export default ServerApi;
