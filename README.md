@@ -34,7 +34,7 @@ The Face Detection App also has a pretty simple login/register system with profi
 
 ## How to test it out
 
-### 🌎 Face Recognition APp is available online as a demo
+### 🌎 Face Recognition App is available online as a demo
   - 📡 Live web app: https://pedro742k2.github.io/face-recognition-frontend/
 ### 🏠 But if you want to test it locally and make changes to the code
   - Clone this repository to the desired directory
