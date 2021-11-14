@@ -4,6 +4,7 @@
 
 Although the password you introduce when registering is fully secured with a hash and a salt, this app isn't meant to be focused on login safety.
 Face Recognition App user login data will only be stored to simulate an authentication for the next time you open the Web App and store your profile credits, but anyone can increment them (the credits) with your login ID and an API platform like "Insomnia" or "Postman".
+
 Nothing of these puts the data you introduce in danger, nor your personal info, but keep in mind that, if you analyze the front(back)end code, you'll likely see that anyone can increment credits on your account, which obviously, isn't a bad thing at all right? 😁 Remember, this is just a demo app to analyze the number of faces on a photo and mark them inside boxes.
 
 ## Screenshots
