@@ -1,3 +1,7 @@
+.image {
+  border-radius: 5px;
+}
+
 .bounding-box {
   position: absolute;
   box-shadow: 0 0 0 3px #4f14f2 inset;

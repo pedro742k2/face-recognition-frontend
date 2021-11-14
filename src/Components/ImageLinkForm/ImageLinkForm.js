@@ -10,7 +10,7 @@ class ImageLinkForm extends Component {
     return (
       <div>
         <p className="input-title f2">
-          {"We will detect some faces on your photos! Give it a try"}
+          We will detect faces on given images! Give it a try
         </p>
 
         <div className="center">
@@ -18,7 +18,7 @@ class ImageLinkForm extends Component {
             <input
               className="input-field f4 pa2 w-70"
               type="text"
-              placeholder="URL"
+              placeholder="Image URL"
               onChange={this.props.onInputChange}
             />
             <button

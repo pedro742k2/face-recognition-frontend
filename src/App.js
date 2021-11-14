@@ -24,6 +24,8 @@ class App extends Component {
       box: [],
       route: "signin",
       isSignedIn: false,
+      isLoading: false,
+      loadingState: "",
 
       user: {
         id: "",
@@ -53,7 +55,17 @@ class App extends Component {
   };
 
   calculateFaceLocation = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions;
+    const { outputs } = data;
+
+    if (!outputs) {
+      this.setState({ isLoading: false, loadingState: "" });
+
+      return alert(
+        "Something went wrong ...\nCheck if the URL returns a valid image"
+      );
+    }
+
+    const clarifaiFace = data?.outputs[0]?.data.regions;
 
     const image = document.getElementById("input-image");
     const width = Number(image.width);
@@ -69,7 +81,7 @@ class App extends Component {
       return obj;
     });
 
-    this.setState({ box: faceBoxes });
+    this.setState({ box: faceBoxes, isLoading: false, loadingState: "" });
   };
 
   onInputChange = (event) => {
@@ -81,6 +93,8 @@ class App extends Component {
       {
         imageUrl: this.state.input,
         box: [],
+        isLoading: true,
+        loadingState: "Requesting data from API ...",
       },
       this.requestApi
     );
@@ -128,8 +142,15 @@ class App extends Component {
     this.setState({ route });
   };
 
+  showMessage = (facesNumber) => {
+    window.scrollTo(0, document.body.scrollHeight);
+
+    return <h1 className="info-message">Detected {facesNumber} faces</h1>;
+  };
+
   render() {
-    const { isSignedIn, route, box, imageUrl, user } = this.state;
+    const { isSignedIn, route, box, imageUrl, user, isLoading, loadingState } =
+      this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
@@ -148,6 +169,10 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onBtnSubmit={this.onBtnSubmit}
             />
+            {isLoading ? (
+              <h1 className="info-message">{loadingState}</h1>
+            ) : null}
+            {box.length ? this.showMessage(box.length) : null}
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
         ) : route === "signin" ? (

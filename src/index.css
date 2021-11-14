@@ -12,6 +12,7 @@ button,
 
 html,
 body {
+  scroll-behavior: smooth;
   padding: 5px;
 }
 

@@ -1,3 +1,3 @@
-const ServerApi = "https://intel-smart-face.herokuapp.com";
+const ServerApi = "https://face-recognition-server-pedro.herokuapp.com";
 
 export default ServerApi;

@@ -73,7 +73,8 @@ class Signin extends Component {
         } else {
           this.showLoginError();
         }
-      });
+      })
+      .catch((error) => alert(`Server error...\nTry again later\n\nError: ${error}`))
   };
 
   checkInputs = () => {
