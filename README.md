@@ -50,3 +50,21 @@ The Face Detection App also has a pretty simple login/register system with profi
 
   - 🛠️ If you have any suggestions, want to report an issue or give general feedback, feel free to make a pull request or email me at pedro.manuel.peres.batista@gmail.com with the suggestion or detailed description of the problem 😀.
   - 🙌 I'll thank you for that!
+
+## 💻 Technologies
+
+- Frontend
+  - React
+  - CSS
+  - Tachyons
+  - Animate.css
+
+- Backend ([Repository](https://github.com/pedro742k2/face-recognition-backend))
+  - Node.js
+  - Express
+  - Bcrypt
+  - **Knex** and **PG** for the database connection
+  - Database: **PostgreSQL**
+
+- Services
+  - Clarifai face detection API
