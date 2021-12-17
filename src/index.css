@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
 
+* {
+  outline: none;
+}
+
 html,
 body,
 input,
@@ -12,6 +16,7 @@ button,
 
 html,
 body {
+  font-size: 100%;
   scroll-behavior: smooth;
   padding: 5px;
 }
@@ -34,4 +39,40 @@ input:-webkit-autofill:active {
 
 input:-webkit-autofill {
   -webkit-text-fill-color: #fff !important;
+}
+
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  html {
+    font-size: 65%;
+  }
+}
+
+/* Scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #1f5cd5, #4f4196);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 3px;
 }

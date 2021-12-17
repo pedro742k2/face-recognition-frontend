@@ -1,6 +1,33 @@
 .Tilt {
-    background: linear-gradient(89deg, #553d8d 0%, #006eff 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: linear-gradient(
+    89deg,
+    rgba(85, 61, 141, 0.75) 0%,
+    rgba(0, 110, 255, 0.75) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+}
+
+.Tilt img {
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .Tilt {
+    width: 13vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .Tilt {
+    width: 16vw;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .Tilt {
+    width: 19vw;
+  }
 }

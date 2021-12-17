@@ -4,6 +4,7 @@ import "./Responsive.css";
 import closeBtn from "../../Assets/close.svg";
 import ServerApi from "../../Services/ServerApi";
 import validator from "validator";
+import loadingAnimation from "../../Assets/animations/loading-login.json";
 
 class Register extends Component {
   constructor(props) {
@@ -99,6 +100,17 @@ class Register extends Component {
       this.removeErrors("error-box invalid-email");
 
       if (registerPwrd === secondPwrd) {
+        const element = document.querySelector("#loading-circle-animation");
+
+        console.log("Register Lottie loaded");
+        this.props.lottie.loadAnimation({
+          container: element, // the dom element that will contain the animation
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          animationData: loadingAnimation,
+        });
+
         fetch(`${ServerApi}/register`, {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -119,6 +131,12 @@ class Register extends Component {
             } else {
               this.showRegisterError();
             }
+          })
+          .catch((error) =>
+            alert(`Server error...\nTry again later\n\nError: ${error}`)
+          )
+          .finally(() => {
+            this.props.lottie.destroy();
           });
       } else {
         const notMatchPwrds = document.getElementsByClassName(
@@ -278,6 +296,7 @@ class Register extends Component {
             </button>
           </div>
         </div>
+        <div id="loading-circle-animation"></div>
 
         <div className="errors-container">
           <div className="error-box name">
@@ -287,9 +306,8 @@ class Register extends Component {
               src={closeBtn}
               className="close"
               onClick={() => {
-                const nameError = document.getElementsByClassName(
-                  "error-box name"
-                )[0];
+                const nameError =
+                  document.getElementsByClassName("error-box name")[0];
                 nameError.classList.remove("active");
               }}
             ></img>
@@ -302,9 +320,8 @@ class Register extends Component {
               src={closeBtn}
               className="close"
               onClick={() => {
-                const userError = document.getElementsByClassName(
-                  "error-box user"
-                )[0];
+                const userError =
+                  document.getElementsByClassName("error-box user")[0];
                 userError.classList.remove("active");
               }}
             ></img>
@@ -317,9 +334,8 @@ class Register extends Component {
               src={closeBtn}
               className="close"
               onClick={() => {
-                const emailError = document.getElementsByClassName(
-                  "error-box email"
-                )[0];
+                const emailError =
+                  document.getElementsByClassName("error-box email")[0];
                 emailError.classList.remove("active");
               }}
             ></img>
@@ -332,9 +348,8 @@ class Register extends Component {
               src={closeBtn}
               className="close"
               onClick={() => {
-                const pwrdError = document.getElementsByClassName(
-                  "error-box password"
-                )[0];
+                const pwrdError =
+                  document.getElementsByClassName("error-box password")[0];
                 pwrdError.classList.remove("active");
               }}
             ></img>

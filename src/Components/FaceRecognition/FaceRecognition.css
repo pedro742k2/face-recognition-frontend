@@ -1,10 +1,14 @@
 .image {
   border-radius: 5px;
+  /* border: 3px solid #4f14f2; */
+  width: 100%;
+  max-width: 80vw;
+  max-height: 80vh;
 }
 
 .bounding-box {
   position: absolute;
-  box-shadow: 0 0 0 3px #4f14f2 inset;
+  border: 3px dashed #4f14f2;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -12,5 +16,5 @@
 }
 
 .bounding-box:hover {
-  background-color: rgba(97, 39, 255, 0.25);
+  background-color: rgba(97, 39, 255, 0.5);
 }

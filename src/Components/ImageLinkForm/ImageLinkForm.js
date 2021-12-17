@@ -8,26 +8,24 @@ class ImageLinkForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="image-link-container">
         <p className="input-title f2">
-          We will detect faces on given images! Give it a try
+          We will detect faces on your images. Give it a try!
         </p>
 
-        <div className="center">
-          <div className="form center pa4 br3 shadow-5">
-            <input
-              className="input-field f4 pa2 w-70"
-              type="text"
-              placeholder="Image URL"
-              onChange={this.props.onInputChange}
-            />
-            <button
-              className="input-btn w-30 f4 ph3 pv2 dib pointer"
-              onClick={this.props.onBtnSubmit}
-            >
-              Detect
-            </button>
-          </div>
+        <div className="link-form">
+          <input
+            className="input-field f4 pa2 w-70"
+            type="text"
+            placeholder="Image URL"
+            onChange={this.props.onInputChange}
+          />
+          <button
+            className="input-btn w-30 f4 ph3 pv2 dib pointer"
+            onClick={this.props.onBtnSubmit}
+          >
+            Detect
+          </button>
         </div>
       </div>
     );

@@ -14,6 +14,8 @@ import Particles from "react-particles-js";
 import particlesOptions from "./Settings/particlesOptions";
 /* Server IP */
 import ServerApi from "./Services/ServerApi";
+import lottie from "lottie-web";
+import loadingAnimation from "./Assets/animations/loading_api.json";
 
 class App extends Component {
   constructor() {
@@ -40,6 +42,22 @@ class App extends Component {
     this.baseState = this.state;
   }
 
+  componentDidUpdate() {
+    const element = document.querySelector("#link-loading-animation");
+
+    lottie.loadAnimation({
+      container: element, // the dom element that will contain the animation
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: loadingAnimation,
+      rendererSettings: {
+        clearCanvas: false,
+        id: "loading-animation-id",
+      },
+    });
+  }
+
   loadUsers = (user) => {
     const { id, name, user_name, email, entries, joined } = user[0];
     this.setState({
@@ -55,13 +73,11 @@ class App extends Component {
   };
 
   calculateFaceLocation = (data) => {
-    const { outputs } = data;
-
-    if (!outputs) {
+    if (!data.outputs) {
       this.setState({ isLoading: false, loadingState: "" });
 
       return alert(
-        "Something went wrong ...\nCheck if the URL returns a valid image"
+        "Something went wrong ...\nCheck if the URL is a valid image"
       );
     }
 
@@ -105,6 +121,8 @@ class App extends Component {
   };
 
   requestApi = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+
     fetch(`${ServerApi}/image_url`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -129,12 +147,12 @@ class App extends Component {
             .catch(console.log);
         }
         this.calculateFaceLocation(response);
-      });
+      })
+      .catch(console.error);
   };
 
   onRouteChange = (route) => {
     if (route === "signin") {
-      // this.setState({ isSignedIn: false });
       this.setState(this.baseState);
     } else if (route === "home") {
       this.setState({ isSignedIn: true });
@@ -170,18 +188,23 @@ class App extends Component {
               onBtnSubmit={this.onBtnSubmit}
             />
             {isLoading ? (
-              <h1 className="info-message">{loadingState}</h1>
+              <div className="loading-message">
+                <div id="link-loading-animation"></div>
+                <h1 className="info-message">{loadingState}</h1>
+              </div>
             ) : null}
             {box.length ? this.showMessage(box.length) : null}
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
         ) : route === "signin" ? (
           <Signin
+            lottie={lottie}
             loadUsers={this.loadUsers}
             onRouteChange={this.onRouteChange}
           />
         ) : (
           <Register
+            lottie={lottie}
             loadUsers={this.loadUsers}
             onRouteChange={this.onRouteChange}
           />

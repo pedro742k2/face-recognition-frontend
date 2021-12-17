@@ -3,6 +3,7 @@ import "./Signin.css";
 import "./Responsive.css";
 import closeBtn from "../../Assets/close.svg";
 import ServerApi from "../../Services/ServerApi";
+import loadingAnimation from "../../Assets/animations/loading-login.json";
 
 class Signin extends Component {
   constructor(props) {
@@ -55,6 +56,19 @@ class Signin extends Component {
   };
 
   onSubmitSigiIn = () => {
+    const element = document.querySelector("#loading-circle-animation");
+
+    this.props.lottie.loadAnimation({
+      container: element, // the dom element that will contain the animation
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: loadingAnimation,
+      rendererSettings: {
+        clearCanvas: false,
+      },
+    });
+
     fetch(`${ServerApi}/signin`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -74,7 +88,12 @@ class Signin extends Component {
           this.showLoginError();
         }
       })
-      .catch((error) => alert(`Server error...\nTry again later\n\nError: ${error}`))
+      .catch((error) =>
+        alert(`Server error...\nTry again later\n\nError: ${error}`)
+      )
+      .finally(() => {
+        this.props.lottie.destroy();
+      });
   };
 
   checkInputs = () => {
@@ -160,6 +179,7 @@ class Signin extends Component {
             </button>
           </div>
         </div>
+        <div id="loading-circle-animation"></div>
 
         <div className="errors-container">
           <div className="error-box email-user">
@@ -184,9 +204,8 @@ class Signin extends Component {
               src={closeBtn}
               className="close"
               onClick={() => {
-                const pwrdError = document.getElementsByClassName(
-                  "error-box password"
-                )[0];
+                const pwrdError =
+                  document.getElementsByClassName("error-box password")[0];
                 pwrdError.classList.remove("active");
               }}
             ></img>

@@ -75,6 +75,24 @@
   animation-duration: 0.2s;
 }
 
+.loading-message {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .info-message {
   color: #fff;
+}
+
+#link-loading-animation {
+  width: 250px;
+  height: 250px;
+}
+
+#loading-circle-animation {
+  width: 150px;
+  height: 150px;
 }

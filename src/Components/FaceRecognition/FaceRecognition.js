@@ -2,9 +2,12 @@ import React from "react";
 import "./FaceRecognition.css";
 
 const FaceRecognition = ({ box, imageUrl }) => {
+  if (imageUrl) {
+    document.querySelector("#input-image").style.border = "2px solid #4f14f2";
+  }
   return (
-    <div className="center ma">
-      <div className="absolute mt2 mb2">
+    <div className="center">
+      <div className="absolute">
         <img
           id="input-image"
           className="image"
