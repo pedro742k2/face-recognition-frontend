@@ -1,4 +1,4 @@
 // const ServerApi = "https://face-recognition-server-pedro.herokuapp.com";
-const ServerApi = "http://localhost:4000";
+const ServerApi = "https://face-recognition-server-pedro.herokuapp.com";
 
 export default ServerApi;
