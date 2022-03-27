@@ -87,6 +87,10 @@ class Register extends Component {
     }
   };
 
+  saveAuthTokenInSession = (token) => {
+    return window.sessionStorage.setItem("token", token);
+  };
+
   onSubmitRegister = () => {
     const {
       registerName,
@@ -123,11 +127,19 @@ class Register extends Component {
         })
           .then((response) => response.json())
           .then((data) => {
-            const { isSuccessful, user } = data;
+            const { success, userId, token } = data;
 
-            if (isSuccessful) {
-              this.props.loadUsers(user);
-              this.props.onRouteChange("home");
+            if (success) {
+              this.saveAuthTokenInSession(token);
+              this.props
+                .getUserProfile(userId, token)
+                .then((user) => {
+                  if (user.id) {
+                    this.props.loadUsers(user);
+                    this.props.onRouteChange("home");
+                  }
+                })
+                .catch((error) => console.log(error));
             } else {
               this.showRegisterError();
             }

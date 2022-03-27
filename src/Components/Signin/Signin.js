@@ -55,6 +55,10 @@ class Signin extends Component {
     }
   };
 
+  saveAuthTokenInSession = (token) => {
+    return window.sessionStorage.setItem("token", token);
+  };
+
   onSubmitSigiIn = () => {
     const element = document.querySelector("#loading-circle-animation");
 
@@ -79,18 +83,27 @@ class Signin extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        const { isSuccessful, msg } = data;
+        const { success, userId, token } = data;
 
-        if (isSuccessful) {
-          this.props.loadUsers(msg);
-          this.props.onRouteChange("home");
+        if (success) {
+          this.saveAuthTokenInSession(token);
+          this.props
+            .getUserProfile(userId, token)
+            .then((user) => {
+              if (user.id) {
+                this.props.loadUsers(user);
+                this.props.onRouteChange("home");
+              }
+            })
+            .catch((error) => console.log(error));
         } else {
           this.showLoginError();
         }
       })
-      .catch((error) =>
-        alert(`Server error...\nTry again later\n\nError: ${error}`)
-      )
+      .catch((error) => {
+        console.warn(error);
+        alert(`Unexpected error...\nPlease, try again later`);
+      })
       .finally(() => {
         this.props.lottie.destroy();
       });

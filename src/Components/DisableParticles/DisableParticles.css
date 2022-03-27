@@ -1,0 +1,25 @@
+.disable-particles-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.disable-particles-container button {
+  color: #fff;
+  max-width: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.25);
+
+  transition: all ease 0.25s;
+}
+
+.disable-particles-container button:hover {
+  background-color: transparent;
+  box-shadow: inset 200px 0 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.particles.disabled {
+  display: none;
+}

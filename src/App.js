@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 /* CSS stylesheet */
 import "./App.css";
 /* React Components */
@@ -9,11 +9,15 @@ import Rank from "./Components/Rank/Rank";
 import FaceRecognition from "./Components/FaceRecognition/FaceRecognition";
 import Signin from "./Components/Signin/Signin";
 import Register from "./Components/Register/Register";
+import Modal from "./Components/Modal/Modal";
+import Profile from "./Components/Profile/Profile";
+import DisableParticles from "./Components/DisableParticles/DisableParticles";
 /* Particles */
 import Particles from "react-particles-js";
 import particlesOptions from "./Settings/particlesOptions";
 /* Server IP */
 import ServerApi from "./Services/ServerApi";
+/* Animation library and assets */
 import lottie from "lottie-web";
 import loadingAnimation from "./Assets/animations/loading_api.json";
 
@@ -28,6 +32,7 @@ class App extends Component {
       isSignedIn: false,
       isLoading: false,
       loadingState: "",
+      isProfileOpen: false,
 
       user: {
         id: "",
@@ -35,11 +40,61 @@ class App extends Component {
         userName: "",
         email: "",
         entries: 0,
+        birthday: "",
+        avatar_url: "",
         joined: "",
       },
     };
 
     this.baseState = this.state;
+  }
+
+  getUserProfile(id, token) {
+    return new Promise((resolve, reject) => {
+      fetch(`${ServerApi}/profile/${id}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+          user_id: id,
+        },
+      })
+        .then((res) => res.json())
+        .then((user) => resolve(user))
+        .catch((error) => reject(error));
+    });
+  }
+
+  componentDidMount() {
+    const token = window.sessionStorage.getItem("token");
+
+    if (token) {
+      fetch(`${ServerApi}/signin`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.id) {
+            this.getUserProfile(data.id, token)
+              .then((user) => {
+                if (user.id) {
+                  this.loadUsers(user);
+                  this.onRouteChange("home");
+                } else {
+                  console.warn("Invalid User");
+                }
+              })
+              .catch(console.warn);
+          } else {
+            console.warn("Invalid Token");
+          }
+        })
+        .catch(console.warn);
+    }
   }
 
   componentDidUpdate() {
@@ -59,15 +114,27 @@ class App extends Component {
   }
 
   loadUsers = (user) => {
-    const { id, name, user_name, email, entries, joined } = user[0];
+    const {
+      id,
+      name,
+      user_name,
+      email,
+      entries,
+      avatar_url,
+      birthday,
+      joined,
+    } = user;
+
     this.setState({
       user: {
-        id: id,
-        name: name,
+        id,
+        name,
         userName: user_name,
-        email: email,
-        entries: entries,
-        joined: joined,
+        email,
+        entries,
+        birthday,
+        avatar_url,
+        joined,
       },
     });
   };
@@ -105,15 +172,18 @@ class App extends Component {
   };
 
   onBtnSubmit = () => {
-    this.setState(
-      {
-        imageUrl: this.state.input,
-        box: [],
-        isLoading: true,
-        loadingState: "Requesting data from API ...",
-      },
-      this.requestApi
-    );
+    const { input } = this.state;
+    if (input) {
+      this.setState(
+        {
+          imageUrl: this.state.input,
+          box: [],
+          isLoading: true,
+          loadingState: "Requesting data from API ...",
+        },
+        this.requestApi
+      );
+    }
   };
 
   clearState = () => {
@@ -123,30 +193,51 @@ class App extends Component {
   requestApi = () => {
     window.scrollTo(0, document.body.scrollHeight);
 
+    const token = window.sessionStorage.getItem("token");
+    const { id } = this.state.user;
+
     fetch(`${ServerApi}/image_url`, {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+        user_id: id,
+      },
       body: JSON.stringify({
         input: this.state.imageUrl,
       }),
     })
       .then((response) => response.json())
-      .then((response) => {
-        if (response) {
+      .then((data) => {
+        if (data) {
           fetch(`${ServerApi}/image`, {
             method: "put",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+              user_id: id,
+            },
             body: JSON.stringify({
-              id: this.state.user.id,
+              id,
             }),
           })
-            .then((response) => response.json())
+            .then((response) => {
+              if (response.status !== 200) {
+                alert("Something went wrong!");
+                throw Error;
+              }
+
+              return response.json();
+            })
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
+              this.calculateFaceLocation(data);
             })
-            .catch(console.log);
+            .catch((error) => {
+              this.setState({ isLoading: false, loadingState: "" });
+              console.log(error);
+            });
         }
-        this.calculateFaceLocation(response);
       })
       .catch(console.error);
   };
@@ -166,17 +257,44 @@ class App extends Component {
     return <h1 className="info-message">Detected {facesNumber} faces</h1>;
   };
 
+  toggleModal = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isProfileOpen: !prevState.isProfileOpen,
+    }));
+  };
+
   render() {
-    const { isSignedIn, route, box, imageUrl, user, isLoading, loadingState } =
-      this.state;
+    const {
+      isSignedIn,
+      route,
+      box,
+      imageUrl,
+      user,
+      isLoading,
+      loadingState,
+      isProfileOpen,
+    } = this.state;
+
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
         <Navigation
+          user={user}
           actualRoute={route}
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
+          toggleModal={this.toggleModal}
         />
+        {isProfileOpen && (
+          <Modal>
+            <Profile
+              toggleModal={this.toggleModal}
+              user={user}
+              loadUsers={this.loadUsers}
+            />
+          </Modal>
+        )}
 
         {route === "home" ? (
           <div className="homeContainer">
@@ -195,19 +313,29 @@ class App extends Component {
             ) : null}
             {box.length ? this.showMessage(box.length) : null}
             <FaceRecognition box={box} imageUrl={imageUrl} />
+
+            <DisableParticles />
           </div>
         ) : route === "signin" ? (
-          <Signin
-            lottie={lottie}
-            loadUsers={this.loadUsers}
-            onRouteChange={this.onRouteChange}
-          />
+          <Fragment>
+            <Signin
+              lottie={lottie}
+              loadUsers={this.loadUsers}
+              onRouteChange={this.onRouteChange}
+              getUserProfile={this.getUserProfile}
+            />
+            <DisableParticles />
+          </Fragment>
         ) : (
-          <Register
-            lottie={lottie}
-            loadUsers={this.loadUsers}
-            onRouteChange={this.onRouteChange}
-          />
+          <Fragment>
+            <Register
+              lottie={lottie}
+              loadUsers={this.loadUsers}
+              onRouteChange={this.onRouteChange}
+              getUserProfile={this.getUserProfile}
+            />
+            <DisableParticles />
+          </Fragment>
         )}
       </div>
     );

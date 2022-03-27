@@ -9,12 +9,16 @@
 .bounding-box {
   position: absolute;
   border: 3px dashed #4f14f2;
+  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   cursor: pointer;
+
+  transition: all linear 0.1s;
 }
 
 .bounding-box:hover {
   background-color: rgba(97, 39, 255, 0.5);
+  border-style: solid;
 }

@@ -10,7 +10,7 @@ class ImageLinkForm extends Component {
     return (
       <div className="image-link-container">
         <p className="input-title f2">
-          We will detect faces on your images. Give it a try!
+          Insert an image URL to detect all the faces in it.
         </p>
 
         <div className="link-form">
