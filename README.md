@@ -1,5 +1,8 @@
 # 🧐 Face Recognition App
 
+### Note:
+- This is the front-end repository of the Face Recognition App, to access the back-end code [click here](https://github.com/pedro742k2/face-recognition-backend)
+
 ## ⚠️ Warning
 
 Although the password you introduce when registering is fully secured with a hash and a salt, this app isn't meant to be focused on login safety.
