@@ -43,6 +43,7 @@ The Face Detection App also has a login/register system with profile credits, wh
     - `npm install` 
     - `npm run build` to create a production build
     - `npm start` to serve the created build folder on your local network
+  - Adittionally, if you're running the API server on your local network, you'll want to change the export of the `ServerApi.js` file to the local URL one, commented on the respective file, located at `src/Services/ServerApi.js`.
 
 ### 🤝 Contributions and feedback
 
