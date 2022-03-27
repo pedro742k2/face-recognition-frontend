@@ -5,34 +5,34 @@
 
 ## Screenshots
 
-  - Login
-<img width="1080" alt="login" src="https://user-images.githubusercontent.com/54741310/141699215-897649d2-a8a5-4a05-b340-4c2d8f42274b.png">
+
+
+  - Signin
+<img width="1080" alt="signin" src="https://user-images.githubusercontent.com/54741310/160286963-cf8327ee-13e2-4f50-9985-4c6155c1c222.png">
 
   - Register
-<img width="1079" alt="register" src="https://user-images.githubusercontent.com/54741310/141699221-f9e82592-0797-4fb5-9f56-79c10bd10510.png">
+<img width="1080" alt="register" src="https://user-images.githubusercontent.com/54741310/160287019-9254628f-5a10-4896-9400-135f0edbd436.png">
 
   - Home
-<img width="1080" alt="main" src="https://user-images.githubusercontent.com/54741310/141699233-6cc9eb74-eb30-4472-b914-cfae164e163e.png">
+<img width="1080" alt="home" src="https://user-images.githubusercontent.com/54741310/160287031-ef1f39f6-ff53-4b70-bcb3-6b663de8cc7c.png">
 
-  - Face Detection (Example 1)
-<img width="1080" alt="face_detection" src="https://user-images.githubusercontent.com/54741310/141699255-cf848a01-7a79-4af8-80b4-41f760e335ff.png">
+  - Face Recognition
+<img width="1080" alt="face_detection" src="https://user-images.githubusercontent.com/54741310/160287062-7faa4727-b49c-4d5d-b3a7-7b6d687fd9aa.png">
 
-  - Face Detection (Example 2)
-<img width="1067" alt="face_detection_2" src="https://user-images.githubusercontent.com/54741310/141699257-c47cf5a8-9987-433f-bea2-0ea40cba0583.png">
-
-
+  - Profile Modal (Edit user info)
+<img width="1080" alt="profile-modal" src="https://user-images.githubusercontent.com/54741310/160287083-006a0038-a689-446a-bb67-99b160951de7.png">
 
 ## 🤖 What is the Face Detection App meaning?
 
 Face Detection App is meant to detect and quantify the number of people faces in a photo.
-Althought it's still in development, Face Detection App is here to expose my skills with API data manipulation and React, JS and CSS skills by outlining the image detected faces with a rectangle. 
-The Face Detection App also has a pretty simple login/register system with profile credits, which are incremented in every successful API call.
+Althought it's still in development, Face Detection App is here to show off my skills with API data manipulation and React.js, JS and CSS skills by outlining the image detected faces inside boxes. 
+The Face Detection App also has a login/register system with profile credits, which are incremented in every successful API call.
 
 ## How to test it out
 
 ### 🌎 Face Recognition App is available online as a demo
   - 📡 Live web app: https://pedro742k2.github.io/face-recognition-frontend/
-### 🏠 But if you want to test it locally and make changes to the code
+### 🏠 If you want to test it locally and make changes to the code
   - Clone this repository to the desired directory
   - Inside the desired directory, run:
     - `npm install` to install all the project dependencies
@@ -50,17 +50,19 @@ The Face Detection App also has a pretty simple login/register system with profi
 ## 💻 Technologies
 
 ### Frontend
-  - React
-  - CSS
-  - Tachyons
-  - Animate.css
+  - React.js;
+  - Tachyons;
+  - Animate.css;
+  - Lottie web animations.
 
 ### Backend ([Repository](https://github.com/pedro742k2/face-recognition-backend))
-  - Node.js
-  - Express
-  - Bcrypt
-  - **Knex** and **PG** for the database connection
-  - Database: **PostgreSQL**
+  - Node.js;
+  - Express;
+  - Bcrypt;
+  - Databases: **PostgreSQL**, **Redis**;
+  - **Knex** and **PG** for the database connection;
+  - Docker;
+  - JWT.
 
 ### Services
   - Clarifai face detection API
