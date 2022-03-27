@@ -36,7 +36,7 @@ The Face Detection App also has a login/register system with profile credits, wh
 
 ### 🏠 If you want to test it locally and make changes to the code
   - Clone this repository to the desired directory
-  - Inside the desired directory, run:
+  - Inside the project root directory, run:
     - `npm install` to install all the project dependencies
     - `npm run local` to execute the development build on your local network
   - **Or**, to create a production build, run:
