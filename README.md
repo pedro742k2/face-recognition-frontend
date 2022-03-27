@@ -5,8 +5,6 @@
 
 ## Screenshots
 
-
-
   - Signin
 <img width="1080" alt="signin" src="https://user-images.githubusercontent.com/54741310/160286963-cf8327ee-13e2-4f50-9985-4c6155c1c222.png">
 
