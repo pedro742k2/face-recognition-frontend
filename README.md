@@ -31,7 +31,9 @@ The Face Detection App also has a login/register system with profile credits, wh
 ## How to test it out
 
 ### 🌎 Face Recognition App is available online as a demo
-  - 📡 Live web app: https://pedro742k2.github.io/face-recognition-frontend/
+  - 📡 Live web app: https://pedro742k2.github.io/face-recognition-frontend
+  - 📡 Live API server: https://face-recognition-server-pedro.herokuapp.com/api
+
 ### 🏠 If you want to test it locally and make changes to the code
   - Clone this repository to the desired directory
   - Inside the desired directory, run:
